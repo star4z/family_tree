@@ -22,7 +22,7 @@ class AddPersonNamePage(QWizardPage):
         name_field = QLineEdit()
 
         dob_label = QLabel("Date of birth: ")
-        dob_field = QCalendarWidget()
+        dob_field = QDateEdit()
 
         parents_label = QLabel("Parents: ")
         parents_field = QLabel()
