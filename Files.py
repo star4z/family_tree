@@ -13,6 +13,10 @@ def get_person(str_in):
     return PersonReference(uid, parents, children)
 
 
+def add_person(person):
+    ppl_dict[person.uid] = PersonReference(person.uid, person.parents, person.partners)
+
+
 def read_index():
     try:
         os.mkdir('etc')
