@@ -1,8 +1,25 @@
+import sys
+
 from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
 
 from PersonCreationWizard import PersonCreationWizard
+
+# Back up the reference to the exceptionhook
+sys._excepthook = sys.excepthook
+
+
+def my_exception_hook(exctype, value, traceback):
+    # Print the error and traceback
+    print(exctype, value, traceback)
+    # Call the normal Exception hook after
+    sys._excepthook(exctype, value, traceback)
+    sys.exit(1)
+
+
+# Set the exception hook to our wrapping function
+sys.excepthook = my_exception_hook
 
 
 class OnClickProxyWidget(QGraphicsProxyWidget):
@@ -47,7 +64,11 @@ def init_app():
     view.setWindowTitle("Family tree")
     view.resize(size)
     view.show()
-    app.exec_()
+
+    try:
+        sys.exit(app.exec_())
+    except:
+        print("Exiting")
 
 
 init_app()

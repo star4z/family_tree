@@ -9,5 +9,9 @@ class PersonCreationWizard(QWizard):
         super().addPage(AddPersonNamePage())
 
     def accept(self) -> None:
-        name = super().field("name").toString()
-        dob = super().field("dob").toDate()
+        name = super().field("name")
+        dob = super().field("dob").date()
+
+        print(name, dob.month(), dob.day(), dob.year())
+
+        super().accept()
