@@ -17,6 +17,19 @@ def add_person(person):
     ppl_dict[person.uid] = PersonReference(person.uid, person.parents, person.partners)
 
 
+def update_person(person):
+    add_person(person)
+
+    file_name = 'etc/' + person.uid
+
+    try:
+        os.mkdir(file_name)
+    except FileExistsError:
+        print(file_name + ' already exists')
+
+    index_file = open(file_name + '/index.dat', mode='w')
+
+
 def read_index():
     try:
         os.mkdir('etc')
