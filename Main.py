@@ -9,6 +9,7 @@ from PersonCreationWizard import PersonCreationWizard
 # Back up the reference to the exceptionhook
 sys._excepthook = sys.excepthook
 
+
 #  Handles printing Qt errors
 def my_exception_hook(exctype, value, traceback):
     # Print the error and traceback
