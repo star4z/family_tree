@@ -13,13 +13,16 @@ class AddPersonNamePage(QWizardPage):
         dob_field = QDateEdit()
 
         parents_label = QLabel("Parents: ")
-        parents_field = QLabel()
+        parents_field = QLabel()  # filled out based on context
 
         spouse_label = QLabel("Spouse: ")
-        spouse_field = QLabel()
+        spouse_field = QLabel()  # filled out based on context
 
         children_label = QLabel("Children: ")
-        children_field = QLabel()
+        children_field = QLabel()  # filled out based on context
+
+        super().registerField("name", name_field)
+        super().registerField("dob", dob_field)
 
         layout = QFormLayout()
 
