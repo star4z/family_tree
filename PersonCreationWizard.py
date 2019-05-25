@@ -1,5 +1,9 @@
 from PyQt5.QtWidgets import QWizard, QWizardPage, QLabel, QLineEdit, QDateEdit, QFormLayout
 
+from Files import update_person
+from Person import Person
+from nameparser import HumanName
+
 
 class PersonCreationWizard(QWizard):
     def __init__(self):
@@ -10,7 +14,18 @@ class PersonCreationWizard(QWizard):
         name = super().field("name")
         dob = super().field("dob").date()
 
-        print(name, dob.month(), dob.day(), dob.year())
+        p = Person()
+
+        human_name = HumanName(name)
+
+        p.name_title = human_name.title
+        p.name_first = human_name.first
+        p.name_middle = human_name.middle
+        p.name_last = human_name.last
+        p.name_suffix = human_name.suffix
+        p.name_nickname = human_name.nickname
+
+        update_person(p)
 
         super().accept()
 

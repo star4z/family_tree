@@ -13,12 +13,16 @@ class PersonReference:
 class Person:
     def __init__(self):
         self.uid = datetime.now().microsecond
+        self.name_title = ""
         self.name_first = ""
-        self.name_last = ""
         self.name_middle = ""
+        self.name_last = ""
         self.name_alts = []
+        self.name_suffix = ""
         self.name_nickname = ""  # default nickname, eg. Dwayne "The Rock" Johnson (overrides middle initial?)
         self.name_nicknames = []
+
+        self.gender = ""
 
         # relations are indicated by uid
         self.parents = [0, 0]
@@ -35,6 +39,12 @@ class Person:
 
     def partners(self):
         return map(lambda relationship: relationship.partnerUid, self.relationships)
+
+    def middle_initial(self):
+        if len(self.name_middle) > 0:
+            return self.name_middle[0]
+        else:
+            return ""
 
 
 class PartnerRelationShip:
