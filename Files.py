@@ -20,7 +20,7 @@ def add_person(person):
 def update_person(person):
     add_person(person)
 
-    file_name = 'etc/' + person.uid
+    file_name = f'etc/{person.uid}'
 
     try:
         os.mkdir(file_name)
