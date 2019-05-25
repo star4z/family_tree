@@ -93,6 +93,7 @@ class AddPersonNamePage(QWizardPage):
         gender_field.addItem("Other", Gender.OTHER)
 
         super().registerField(KEY_NAME, name_field)
+        super().registerField(KEY_GENDER, gender_field)
         super().registerField(KEY_BIRTH_DATE, birth_date_field)
         super().registerField(KEY_BIRTH_LOCATION, birth_location_field)
         super().registerField(KEY_STILL_LIVING, still_living_checkbox)
