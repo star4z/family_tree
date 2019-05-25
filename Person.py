@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from PyQt5.QtCore import QDate
+
 
 class PersonReference:
     tree_id = 0
@@ -28,7 +30,7 @@ class Person:
         self.parents = [0, 0]
         self.relationships = []  # array of PartnerRelationship
 
-        self.birth_date = 0
+        self.birth_date = QDate()
         self.birth_loc = ""
 
         self.still_living = False

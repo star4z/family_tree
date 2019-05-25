@@ -25,6 +25,11 @@ class PersonCreationWizard(QWizard):
         p.name_suffix = human_name.suffix
         p.name_nickname = human_name.nickname
 
+        p.birth_date = dob
+
+        # birthday = f"{dob.month()} {dob.day()}, {dob.year()}"
+        # print(birthday)
+
         update_person(p)
 
         super().accept()
