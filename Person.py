@@ -1,4 +1,5 @@
 from datetime import datetime
+from enum import Enum
 
 from PyQt5.QtCore import QDate
 
@@ -19,12 +20,12 @@ class Person:
         self.name_first = ""
         self.name_middle = ""
         self.name_last = ""
-        self.name_alts = []
+        self.name_alts = []  # legal name changes, e.g. maiden names
         self.name_suffix = ""
-        self.name_nickname = ""  # default nickname, eg. Dwayne "The Rock" Johnson (overrides middle initial?)
+        self.name_nickname = ""  # default nickname, e.g. Dwayne "The Rock" Johnson (overrides middle initial?)
         self.name_nicknames = []
 
-        self.gender = ""
+        self.gender = None
 
         # relations are indicated by uid
         self.parents = [0, 0]
@@ -64,3 +65,9 @@ class PartnerRelationShip:
 class Child:
     uid = 0
     adopted = False
+
+
+class Gender(Enum):
+    MALE = 0
+    FEMALE = 1
+    OTHER = 2
