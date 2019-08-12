@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import *
 
 from PersonCreationWizard import PersonCreationWizard
 
-# Back up the reference to the exceptionhook
+# Back up the reference to the exception hook
 sys._excepthook = sys.excepthook
 
 
@@ -66,10 +66,12 @@ def init_app():
     view.resize(size)
     view.show()
 
-    try:
-        sys.exit(app.exec_())
-    except:
-        print("Exiting")
+    sys.exit(app.exec_())
 
 
-init_app()
+def main():
+    init_app()
+
+
+if __name__ == '__main__':
+    main()
