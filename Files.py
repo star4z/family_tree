@@ -1,3 +1,4 @@
+import json
 import os
 
 from Person import PersonReference
@@ -27,7 +28,13 @@ def update_person(person):
     except FileExistsError:
         print(file_name + ' already exists')
 
-    index_file = open(file_name + '/index.dat', mode='w')
+    person_index_file = open(file_name + '/index.dat', mode='w')
+    # person_index_file.write(json.dumps(person))
+
+    person_index_file.close()
+
+    master_index_file = open('etc/index.dat', mode='w')
+    master_index_file.write(json.dumps(ppl_dict))
 
 
 def read_index():
