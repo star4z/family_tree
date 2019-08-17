@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QWizard, QWizardPage, QLabel, QLineEdit, QDateEdit, QFormLayout, QCheckBox, QComboBox
 
-from Files import update_person
-from Person import *
+from qt_old.Files import update_person
+from qt_old.Person import *
 from nameparser import HumanName
 
 KEY_NAME = "person_name"

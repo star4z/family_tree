@@ -4,7 +4,7 @@ from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
 
-from PersonCreationWizard import PersonCreationWizard
+from qt_old.PersonCreationWizard import PersonCreationWizard
 
 # Back up the reference to the exception hook
 sys._excepthook = sys.excepthook

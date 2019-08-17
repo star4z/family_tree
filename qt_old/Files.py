@@ -1,7 +1,7 @@
 import json
 import os
 
-from Person import PersonReference
+from qt_old.Person import PersonReference
 
 ppl_dict = {}  # Root dictionary of all people stored in the database
 
