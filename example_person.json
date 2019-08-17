@@ -1,0 +1,29 @@
+{
+  "name": {
+    "first": "Peter",
+    "last": "Benjamin",
+    "middle": "Parker",
+    "prefix": "Mr."
+  },
+  "gender": "male",
+  "birth": {
+    "date": "1996-04-08",
+    "location": "Bronx, NY"
+  },
+  "relations": [
+    {
+      "id": "2",
+      "relation": "wife",
+      "begin-date": "2025-07-28"
+    },
+    {
+      "id": "3",
+      "relation": "aunt"
+    }
+  ],
+  "files": [
+    "1",
+    "2",
+    "42"
+  ]
+}
