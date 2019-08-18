@@ -22,17 +22,15 @@ def disp_main(people_dict):
         ('Add new person to tree', disp_add_new),
         ('Change details about a person', disp_change),
         ('View all people', disp_view_all),
-        ('Quit', quit)
+        ('Quit', disp_quit)
     ]
 
     disp_menu(options, people_dict, disp_main)
 
 
-def disp_menu(options, people_dict, callback, banner=None):
-    if banner is None:
-        print('What would you like to do?')
-    else:
-        print(banner)
+def disp_menu(options, people_dict, callback):
+    print('What would you like to do?')
+
     for i, option in enumerate(options):
         print(f'({i + 1}) {option[0]}')
     option = int(input('? '))
@@ -43,8 +41,23 @@ def disp_menu(options, people_dict, callback, banner=None):
 
 
 def disp_add_new(people_dict):
-    name = input('Enter name of new person:')
-    person.add_person(people_dict, name=name)
+    name = input('Enter name of new person: ')
+    i = person.add_person(people_dict, name=name)
+    print(f'Added {name}.')
+
+    file_storage.write_person({'id': i, 'name': name})
+
+    disp_add_again_menu(i, people_dict)
+
+
+def disp_add_again_menu(i, people_dict):
+    options = [
+        ('Add another', disp_add_new),
+        ('Add details to just added person', lambda pd: disp_change_person(i, pd)),
+        ('Back', disp_main)
+    ]
+
+    disp_menu(options, people_dict, disp_add_again_menu)
 
 
 def disp_change(people_dict):
@@ -76,16 +89,46 @@ def disp_person_find_fail(people_dict):
     disp_menu(options, people_dict, disp_person_find_fail)
 
 
-def disp_change_person(id, people_dict):
-    pass
+def disp_change_person(pid, people_dict):
+    print(f'PID{pid} has the following details:')
+    person_details = file_storage.read_person(pid)
+    print(person_details)
+    prop = input('What property would you like to add or change? ')
+    value = input('What would you like the new value for that property to be? ')
+
+    person_details[prop] = value
+
+    file_storage.write_person(person_details)
+
+    print('Updated person.')
+
+    disp_change_again(pid, people_dict)
+
+
+def disp_change_again(pid, people_dict):
+    options = [
+        ('Change another detail', lambda pd: disp_change_person(pid, pd)),
+        ('View all', disp_view_all),
+        ('Back', disp_main)
+    ]
+
+    disp_menu(options, people_dict, disp_change_again)
 
 
 def disp_view_all(people_dict):
     for k, v in people_dict.items():
         print(f'PID{k} \t{v["name"]}\t')
 
+    options = [
+        ('Back', disp_main),
+        ('Quit', disp_quit)
+    ]
 
-def quit(people_dict):
+    disp_menu(options, people_dict, disp_view_all)
+
+
+# noinspection PyUnusedLocal
+def disp_quit(people_dict):
     pass
 
 

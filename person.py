@@ -3,6 +3,8 @@ def add_person(people_dict: dict, **kwargs):
 
     people_dict[pid] = kwargs
 
+    return pid
+
 
 def add_attribute(person, people_dict, **kwargs):
     possible_ids = find_id(person, people_dict)
