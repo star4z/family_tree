@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QWizard, QWizardPage, QLabel, QLineEdit, QDateEdit, 
 
 from qt_old.Files import update_person
 from qt_old.Person import *
-from nameparser import HumanName
+from qt_old.nameparser import HumanName
 
 KEY_NAME = "person_name"
 KEY_GENDER = "person_gender"
