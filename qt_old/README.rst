@@ -4,4 +4,8 @@ Made by Benjamin Phillips
 
 Icon made by Freepik from www.flaticon.com
 
-Uses Name Parser by Derek Gulbranson https://github.com/derek73/python-nameparser
+Dependencies
+============
+- PyQt5
+
+- nameparser
