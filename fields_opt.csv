@@ -1,0 +1,6 @@
+Date of birth,date
+Location of birth,text
+Still living,checkbox
+Date of death,date
+Location of death,text
+Gender,combo,Male,Female,other
