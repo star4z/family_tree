@@ -1,22 +1,34 @@
 import csv
 
-from PyQt5.QtWidgets import QWizard, QWizardPage, QLabel, QLineEdit, QDateEdit, QFormLayout, QCheckBox, QComboBox
+from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtWidgets import *
+
+import constants
+import file_storage
+import person
 
 keys = []
 
 
 class PersonCreationWizard(QWizard):
-    def __init__(self):
+    def __init__(self, people_dict):
         super().__init__()
         super().addPage(AddPersonNamePage())
 
+        self.people_dict = people_dict
+
     def accept(self) -> None:
-        person = {}
+        p = {}
 
         for key in keys:
             value = super().field(key)
 
-            person[key] = value
+            p[key] = value
+
+        pid = person.add_person(self.people_dict, name=p['0'])
+
+        self.people_dict[pid].update(p)
+        file_storage.write_root(people_dict=self.people_dict, people_dict_file=constants.ROOT_FILE)
 
         super().accept()
 
@@ -32,7 +44,7 @@ class AddPersonNamePage(QWizardPage):
 
         layout = QFormLayout()
 
-        with open('../fields_req.csv', newline='') as req_fields_file:
+        with open(constants.REQ_FIELDS_FILE, newline='') as req_fields_file:
             reader = csv.reader(req_fields_file)
 
             for row in reader:
@@ -55,10 +67,18 @@ class AddPersonNamePage(QWizardPage):
                 keys.append(key)
                 key_index += 1
 
-        with open('../fields_opt.csv', newline='') as req_fields_file:
+        add_field_button = QPushButton('&Add field')
+        add_field_button.clicked.connect(self.show_add_field_dialog)
+        layout.addRow(QPushButton('&Add field'))
+
+        with open(constants.OPT_FIELDS_FILE, newline='') as req_fields_file:
             reader = csv.reader(req_fields_file)
 
             for row in reader:
                 print(row)
 
         super().setLayout(layout)
+
+    @pyqtSlot()
+    def show_add_field_dialog(self):
+        print("Adding field")

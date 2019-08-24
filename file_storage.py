@@ -12,13 +12,13 @@ def write_root(people_dict, people_dict_file):
         json.dump(people_dict, file)
 
 
-def read_person(id):
-    with open(str(id)) as file:
+def read_person(pid):
+    with open(str(pid)) as file:
         data = json.load(file)
         return data
 
 
 def write_person(data):
-    id = data["id"]
-    with open(str(id), 'w') as file:
+    pid = data["id"]
+    with open(str(pid), 'w') as file:
         json.dump(data, file)

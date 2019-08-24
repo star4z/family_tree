@@ -6,7 +6,7 @@ def add_person(people_dict: dict, **kwargs):
     return pid
 
 
-def add_attribute(person, people_dict, **kwargs):
+def add_attribute_to_unknown_id(person, people_dict, **kwargs):
     possible_ids = find_id(person, people_dict)
 
     if len(possible_ids) == 1:

@@ -1,9 +1,12 @@
+import os
 import sys
 
 from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
 
+import constants
+import file_storage
 from PersonCreationWizard import PersonCreationWizard
 
 # Back up the reference to the exception hook in case we need it later
@@ -41,20 +44,20 @@ def open_person_creation_wizard():
     # print("Pretending to create person...")
 
 
-def create_proxy_widget(q_widget, width=50, height=50):
-    q = OnClickProxyWidget(open_person_creation_wizard)
+def create_person_wizard_widget(q_widget, people_dict, width=50, height=50):
+    q = OnClickProxyWidget(lambda: PersonCreationWizard(people_dict).exec())
     q.setWidget(q_widget)
     q.setPreferredSize(width, height)
     return q
 
 
-def init_app():
+def init_app(people_dict):
     app = QApplication([])
     icon = QIcon("icon.png")
     app.setWindowIcon(icon)
     scene = QGraphicsScene()
     add = QPushButton('+')
-    a = create_proxy_widget(add, 50, 50)
+    a = create_person_wizard_widget(add, people_dict, 50, 50)
     layout = QGraphicsAnchorLayout()
     layout.addCornerAnchors(a, Qt.TopLeftCorner, layout, Qt.TopLeftCorner)
     layout.addCornerAnchors(a, Qt.BottomRightCorner, layout, Qt.BottomRightCorner)
@@ -71,7 +74,14 @@ def init_app():
 
 
 def main():
-    init_app()
+    root_file = constants.ROOT_FILE
+
+    if os.path.exists(root_file):
+        people_dict = file_storage.read_root(root_file)
+    else:
+        people_dict = {}
+
+    init_app(people_dict)
 
 
 if __name__ == '__main__':
