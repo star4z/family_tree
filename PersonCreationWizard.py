@@ -69,7 +69,7 @@ class AddPersonNamePage(QWizardPage):
 
         add_field_button = QPushButton('&Add field')
         add_field_button.clicked.connect(self.show_add_field_dialog)
-        layout.addRow(QPushButton('&Add field'))
+        layout.addRow(add_field_button)
 
         with open(constants.OPT_FIELDS_FILE, newline='') as req_fields_file:
             reader = csv.reader(req_fields_file)
@@ -79,6 +79,5 @@ class AddPersonNamePage(QWizardPage):
 
         super().setLayout(layout)
 
-    @pyqtSlot()
     def show_add_field_dialog(self):
         print("Adding field")
