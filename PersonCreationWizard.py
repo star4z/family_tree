@@ -1,6 +1,5 @@
 import csv
 
-from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import *
 
 import constants
@@ -56,7 +55,7 @@ class AddPersonNamePage(QWizardPage):
                 elif row[1] == 'combo':
                     field = QComboBox()
                     for i in range(2, len(row)):
-                        field.addItem(row[i], row[i])
+                        field.addItem(row[i])
                 else:
                     field = QLineEdit()
 
@@ -81,3 +80,33 @@ class AddPersonNamePage(QWizardPage):
 
     def show_add_field_dialog(self):
         print("Adding field")
+
+        d = AddFieldDialog()
+        if d.exec_():
+            print(d.field_name_line.text())
+
+
+class AddFieldDialog(QDialog):
+    def __init__(self):
+        super().__init__()
+        layout = QFormLayout()
+
+        field_name_label = QLabel('Field name: ')
+        self.field_name_line = QLineEdit()
+        layout.addRow(field_name_label, self.field_name_line)
+
+        type_label = QLabel('Type: ')
+        self.type_field = QComboBox()
+        self.type_field.addItems(['text', 'date', 'checkbox', 'combo'])
+        layout.addRow(type_label, self.type_field)
+
+        submit = QPushButton('Add')
+        submit.clicked.connect(self.on_close)
+        layout.addRow(submit)
+
+        super().setLayout(layout)
+        super().setWindowTitle('Add a field')
+
+    def on_close(self):
+
+        self.accept()
